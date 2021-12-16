@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { VO } from "../reducer/spaceXReducer";
+import Header from "./Header";
+import Card from "./Card";
 
 function mapStateToProps(state: any) {
   return {
@@ -50,11 +52,23 @@ class App extends React.Component<MyProp> {
 
   render() {
     return (
-      <ul>
-        {this.props.dataList.map((vo: VO, index: number): any => (
-          <li key={index}>{vo.rocketName}</li>
-        ))}
-      </ul>
+      <>
+        <Header />
+        <div className="row row-cols-2 row-cols-lg-5 m-0">
+          {this.props.dataList.map((vo: VO, index: number): any => (
+            <Card
+              rocketId={vo.rocketId}
+              rocketName={vo.rocketName}
+              launchDate={vo.launchDate}
+              launchStatus={vo.launchStatus}
+              isUpcoming={vo.isUpcoming}
+              pic={vo.pic}
+              url={vo.url}
+              youtube={vo.youtube}
+            />
+          ))}
+        </div>
+      </>
     );
   }
 }
