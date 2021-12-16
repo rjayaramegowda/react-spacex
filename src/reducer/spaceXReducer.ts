@@ -1,4 +1,11 @@
-function SpaceXReducer(state: string = 'welcome to redux') {
+
+type VO = {
+  name: string
+}
+
+const voList: Array<VO> = [{name: 'Ravi'}];
+
+function SpaceXReducer(state: any = voList): string {
   return state;
 }
 
