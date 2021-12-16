@@ -1,11 +1,25 @@
 
-type VO = {
-  name: string
+export type VO = {
+  rocketId: string,
+  rocketName: string,
+  launchDate: string,
+  launchStatus: Boolean,
+  isUpcoming:Boolean,
+  pic:String,
+  url:string,
+  youtube:string
 }
 
-const voList: Array<VO> = [{name: 'Ravi'}];
+let vo:VO = {rocketId: "", rocketName: "", launchDate: "", launchStatus: false, isUpcoming: false, pic:"", url: "", youtube:"" };
 
-function SpaceXReducer(state: any = voList): string {
+const voList: Array<VO> = [vo];
+
+function SpaceXReducer(state: any = voList, action:any): any {
+  switch(action.type) {
+    case "GET_SERVICE":
+      console.log('[SpaceXReducer] type = ', action.type );
+      return [...action.payload];
+  }
   return state;
 }
 
