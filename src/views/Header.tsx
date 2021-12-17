@@ -61,7 +61,7 @@ class Header extends React.Component<MyProp, MyState> {
   handleSearch(e: any) {
     console.log("handleSearch() = ", e.target.value);
     this.setState({ searchTxt: e.target.value });
-    this.props.filterBy(this.state);
+    this.props.filterBy({ ...this.state, searchTxt: e.target.value });
   }
 
   render() {
@@ -74,6 +74,7 @@ class Header extends React.Component<MyProp, MyState> {
               onChange={(e) => this.handleSearch(e)}
               placeholder="Search By Rocket Name"
               className="form-control w-100 rounded-pill px-4"
+              value={this.state.searchTxt}
             />
           </div>
 

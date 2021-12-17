@@ -31,7 +31,7 @@ function searchByRocketName(txt:string):any {
 
 function filterByInput(payload:any) {
   console.log("[SpaceXReducer] filterByInput");
-  return voList.filter((vo:VO) => vo.rocketName.toUpperCase().indexOf(payload.searchTxt) !== -1);
+  return voList.filter((vo:VO) => vo.rocketName.toUpperCase().indexOf(payload.searchTxt.toUpperCase()) !== -1);
 }
 
 export default SpaceXReducer;
