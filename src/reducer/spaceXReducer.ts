@@ -10,17 +10,21 @@ export type VO = {
   youtube:string
 }
 
-let vo:VO = {rocketId: "", rocketName: "", launchDate: "", launchStatus: false, isUpcoming: false, pic:"", url: "", youtube:"" };
-
-const voList: Array<VO> = [vo];
+var voList: Array<VO> = [];
 
 function SpaceXReducer(state: any = voList, action:any): any {
   switch(action.type) {
     case "GET_SERVICE":
-      console.log('[SpaceXReducer] type = ', action.type );
-      return [...action.payload];
+     voList = [...action.payload];
+     return [...action.payload];
+    case "SEARCH_BY_ROCKET_NAME":
+      return searchByRocketName(action.payload);    
   }
   return state;
+}
+
+function searchByRocketName(txt:string):any {
+  return voList.filter((vo:any) => vo.rocketName.toUpperCase().indexOf(txt) !== -1)
 }
 
 export default SpaceXReducer;

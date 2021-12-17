@@ -57,6 +57,7 @@ class App extends React.Component<MyProp> {
         <div className="row row-cols-2 row-cols-lg-5 m-0">
           {this.props.dataList.map((vo: VO, index: number): any => (
             <Card
+              key={index}
               rocketId={vo.rocketId}
               rocketName={vo.rocketName}
               launchDate={vo.launchDate}
