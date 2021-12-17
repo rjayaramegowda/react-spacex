@@ -7,30 +7,61 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    searchBy: function (searchTxt: string) {
-      dispatch({ type: "SEARCH_BY_ROCKET_NAME", payload: searchTxt });
+    filterBy: function (payload: any) {
+      console.log("line 11");
+      dispatch({ type: "FILTER_BY_INPUT", payload });
     },
   };
 }
 
 type MyProp = {
-  searchBy: any;
+  filterBy: any;
 };
 
-class Header extends React.Component<MyProp> {
+type MyState = {
+  searchTxt: string;
+  launchStatus: string;
+  launchDate: string;
+  isUpcoming: string;
+};
+
+class Header extends React.Component<MyProp, MyState> {
   constructor(props: any) {
     super(props);
     this.handleStatusDD = this.handleStatusDD.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleLaunchDateDD = this.handleLaunchDateDD.bind(this);
+    this.handleIsUpcomingToggle = this.handleIsUpcomingToggle.bind(this);
+    this.state = {
+      searchTxt: "",
+      launchStatus: "none",
+      launchDate: "none",
+      isUpcoming: "none",
+    };
   }
 
-  handleStatusDD() {
-    console.log("this.handleStatusDD()");
+  handleLaunchDateDD(e: any) {
+    console.log("this.handleStatusDD() = ", e.target.value);
+    this.setState({ launchDate: e.target.value });
+    this.props.filterBy(this.state);
+  }
+
+  handleStatusDD(e: any) {
+    console.log("this.handleStatusDD() = ", e.target.value);
+    this.setState({ launchStatus: e.target.value });
+    this.props.filterBy(this.state);
+  }
+
+  handleIsUpcomingToggle(e: any) {
+    console.log("this.handleStatusDD()= ", e.target.value);
+    this.setState({ isUpcoming: e.target.value });
+    this.props.filterBy(this.state);
   }
 
   handleSearch(e: any) {
     console.log("handleSearch() = ", e.target.value);
-    this.props.searchBy(e.target.value.toUpperCase());
+    this.setState({ searchTxt: e.target.value });
+    this.props.filterBy(this.state);
   }
 
   render() {
@@ -51,46 +82,42 @@ class Header extends React.Component<MyProp> {
           </div>
 
           <div className="col-auto">
-            <label className="form-label">By Launch Date: </label>
-          </div>
-          <div className="col-auto">
             <select
-              value={3}
+              value={this.state.launchDate}
               className="form-select"
               aria-label="Default select example"
-              onChange={this.handleStatusDD}
+              onChange={this.handleLaunchDateDD}
             >
-              <option value="3">Last Week</option>
-              <option value="1">Last Month</option>
-              <option value="2">Last Year</option>
+              <option value="none">By Launch Date</option>
+              <option value="week">Last Week</option>
+              <option value="month">Last Month</option>
+              <option value="year">Last Year</option>
             </select>
           </div>
           <div className="col-auto">
-            <label className="form-label">By Launch Status: </label>
-          </div>
-          <div className="col-auto">
             <select
-              value={3}
+              value={this.state.launchStatus}
               className="form-select"
               aria-label="Default select example"
-              onChange={this.handleStatusDD}
+              onChange={(e) => this.handleStatusDD(e)}
             >
-              <option value="3">Success</option>
-              <option value="1">Failure</option>
+              <option value="none">By Launch Status</option>
+              <option value="success">Success</option>
+              <option value="failure">Failure</option>
             </select>
           </div>
 
           <div className="col-auto">
-            <div className="form-check form-switch">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="flexSwitchCheckChecked"
-                checked
-                onChange={this.handleStatusDD}
-              />
-              <label className="form-check-label">Is it upcoming</label>
-            </div>
+            <select
+              value={this.state.isUpcoming}
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e) => this.handleIsUpcomingToggle(e)}
+            >
+              <option value="none">Is it upcoming</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </div>
         </form>
       </>
