@@ -67,7 +67,6 @@ class Header extends React.Component<MyProp, MyState> {
   render() {
     return (
       <>
-        <h1 className="mt-4 mb-3">React Test - SW Engineer</h1>
         <form className="row g-3 mb-4 d-flex align-items-center">
           <div className="col-12">
             <input
