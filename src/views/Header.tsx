@@ -41,21 +41,21 @@ class Header extends React.Component<MyProp, MyState> {
   }
 
   handleLaunchDateDD(e: any) {
-    console.log("this.handleStatusDD() = ", e.target.value);
+    console.log("this.handleLaunchDateDD() = ", e.target.value);
     this.setState({ launchDate: e.target.value });
-    this.props.filterBy(this.state);
+    this.props.filterBy({ ...this.state, launchDate: e.target.value });
   }
 
   handleStatusDD(e: any) {
     console.log("this.handleStatusDD() = ", e.target.value);
     this.setState({ launchStatus: e.target.value });
-    this.props.filterBy(this.state);
+    this.props.filterBy({ ...this.state, launchStatus: e.target.value });
   }
 
   handleIsUpcomingToggle(e: any) {
-    console.log("this.handleStatusDD()= ", e.target.value);
+    console.log("this.handleIsUpcomingToggle()= ", e.target.value);
     this.setState({ isUpcoming: e.target.value });
-    this.props.filterBy(this.state);
+    this.props.filterBy({ ...this.state, isUpcoming: e.target.value });
   }
 
   handleSearch(e: any) {

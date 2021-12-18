@@ -5,7 +5,12 @@ const Card = (props: VO) => {
   return (
     <div className="card border-0">
       <div>
-        <img src={String(props.pic)} className="img-fluid p-3" alt="..." />
+        <img
+          src={String(props.pic)}
+          className="img-fluid p-3"
+          alt="..."
+          style={{ minHeight: 235, minWidth: 235 }}
+        />
       </div>
       <div className="card-body">
         <p className="card-text text-center">{props.rocketName}</p>
